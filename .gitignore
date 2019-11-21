@@ -1,0 +1,5 @@
+node_modules/
+file_*
+cert.*
+pem.*
+src/assets/logs/
