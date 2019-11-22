@@ -7,23 +7,20 @@ const collection = new Schema({
     room: {
         type: String,
     },
-    detail: {
+    message: {
         type: String,
     },
-    username: {
+    admin: {
         type: String,
-        ref:"Users",
+        ref: "Admins",
     },
-    firstName: {
-        type: String,
-    },
-    lastName: {
+    user: {
         type: String,
     },
-    dateime: {
+    created_at: {
         type: Number,
         default: Date.now,
     },
 })
 
-module.exports = mongoose.model("HistoryNotifications", collection);
+module.exports = mongoose.model("HistoryChats", collection);

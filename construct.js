@@ -6,6 +6,6 @@ module.exports = {
     BASE_URL: "http://localhost:8080",
     REDIS_URL: "",
     CERTIFICATE_KEY: {},
-    PEMMISSION_PEM: "./src/assets/keys/pronet.pem",
-    PEMMISSION_KEY: "./src/assets/keys/pronet.key",
+    PEMMISSION_PEM: "./src/assets/keys/chatFB.pem",
+    PEMMISSION_KEY: "./src/assets/keys/chatFB.key",
 }

@@ -2,7 +2,7 @@ const Collection = require("./collection");
 
 var exports = module.exports = {};
 
-exports.saveUser = async (user, token) => {
+exports.saveAdmin = async (user, token) => {
     let collection = new Collection({
         username: user.username,
         password: user.password,
@@ -15,7 +15,7 @@ exports.saveUser = async (user, token) => {
     return await exports.infoUserById((await collection.save())._id);
 }
 
-exports.deleteUser = async (id) => {
+exports.deleteAdmin = async (id) => {
     return await Collection.remove({ _id: id });
 }
 
@@ -29,7 +29,7 @@ exports.setActive = async (id, data) => {
     return result
 }
 
-exports.updateUserToken = async (email, token) => {
+exports.updatAdminToken = async (email, token) => {
     return await Collection.findOne({
         email: email
     }, {
@@ -39,17 +39,17 @@ exports.updateUserToken = async (email, token) => {
     })
 }
 
-exports.getAllUser = async () => {
+exports.getAllAdmin = async () => {
     return await Collection.find()
 }
 
-exports.duplicateUser = async (username) => {
+exports.duplicatAdmin = async (username) => {
     return await Collection.findOne({
         username: username,
     }) ? false : true;
 }
 
-exports.infoUserById = async (id) => {
+exports.infoAdminById = async (id) => {
     return await Collection.findOne({
         _id: id,
         active: {
@@ -58,7 +58,7 @@ exports.infoUserById = async (id) => {
     })
 }
 
-exports.infoUserByUsername = async (username) => {
+exports.infoAdminByUsername = async (username) => {
     return await Collection.findOne({
         username: username,
         active: {
@@ -67,7 +67,7 @@ exports.infoUserByUsername = async (username) => {
     })
 }
 
-exports.infoUserByTokenWeb = async (tokenWeb) => {
+exports.infoAdminByTokenWeb = async (tokenWeb) => {
     return await Collection.findOne({
         tokenWeb: tokenWeb,
         active: {

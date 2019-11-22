@@ -43,4 +43,4 @@ const collection = new Schema({
     },
 })
 
-module.exports = mongoose.model("Users", collection);
+module.exports = mongoose.model("Admins", collection);

@@ -1,5 +1,5 @@
 {
-  "name": "pronet-service",
+  "name": "chatfb-service",
   "version": "1.0.0",
   "description": "",
   "main": "construct.js",
@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/node": "^7.7.0",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.5",
     "body-parser": "^1.19.0",
@@ -21,6 +23,6 @@
     "method-override": "^3.0.0",
     "mongoose": "^5.7.1",
     "morgan": "^1.9.1",
-    "onesignal-node": "^2.1.1"
+    "socket.io": "^2.3.0"
   }
 }

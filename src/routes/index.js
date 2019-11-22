@@ -14,12 +14,8 @@ app.use(morgan((tokens, request, response) => {
 }))
 
 try {
-    app.use('/login', require('./api/login'))
-    app.use('/user', require('./api/user'))
+    app.use('/account', require('./api/account'))
     app.use('/room', require('./api/room'))
-    // app.use('/pronet', require('./api/pronet'))
-    app.use('/history', require('./api/history'))
-    // app.use('/notification', require('./api/notification'))
 } catch (error) {
     console.error(error)
 }

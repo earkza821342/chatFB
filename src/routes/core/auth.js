@@ -6,7 +6,7 @@ const KEYPEM = require("../../../construct").PEMMISSION_PEM
 const KEYPRIVATE = require("../../../construct").PEMMISSION_KEY
 const checkValue = require("../../libraries/checkValue")
 
-const userModel = require("../../database/Users/model");
+const adminModel = require("../../database/Admins/model");
 
 var exports = module.exports = {}
 
@@ -21,7 +21,7 @@ exports.require = async (request, response, next) => {
             let cert = await fs.readFile(KEYPEM)
             let decoded = jwt.decode(token, cert, { complete: true })
             if (decoded) {
-                request.body.user = await userModel.infoUserByUsername(decoded.username)
+                request.body.admin = await userModel.infoUserByUsername(decoded.username)
                 request.body.statusAuth = 200
                 return next()
             } else {
