@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var databaseDir = path.resolve(__dirname + './database/');
+var databaseDir = path.resolve(__dirname + '/./database/');
 
 function getResponseMap(){
     var data = fs.readFileSync(databaseDir + '/respond.json', 'utf8');

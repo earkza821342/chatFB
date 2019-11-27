@@ -31,7 +31,6 @@ login({email: userInfo.email, password: userInfo.password}, function(err, api){
             });
         });
     }
-
     api.listen(function(err, message){
         if(err){
             console.log(err);

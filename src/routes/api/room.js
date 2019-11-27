@@ -19,7 +19,4 @@ router.post("/", async (request, response) => {
     return response.status(200).send(result)
 })
 
-
-
-
 module.exports = router
