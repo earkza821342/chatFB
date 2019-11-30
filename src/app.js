@@ -3,9 +3,9 @@ const http = require("http")
 const options = require("../construct").CERTIFICATE_KEY
 const app = require("./config/express")
 const init = require("./sockets/init")
-
-// var login = require('facebook-chat-api');
-// var handleMessage = require('./handleMessage.js');
+const bodyParser = require('body-parser')
+const express = require('express')
+appP = express().use(bodyParser.json()); 
 
 init.startSocketServer()
 
@@ -17,49 +17,56 @@ https.createServer(options, app).listen(8081, function () {
     console.log("Server Start HTTPS !!!!! ")
 })
 
-// var userInfo = {
-//     email: 'earkza821342@hotmail.com',
-//     password: 'klabauterman0882014526'
-// };
+app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
-// var timeout = undefined;
+app.post('/webhook', (req, res) => {  
+ 
+    let body = req.body;
+  
+    // Checks this is an event from a page subscription
+    if (body.object === 'page') {
+  
+      // Iterates over each entry - there may be multiple if batched
+      body.entry.forEach(function(entry) {
+  
+        // Gets the message. entry.messaging is an array, but 
+        // will only ever contain one message, so we get index 0
+        let webhook_event = entry.messaging[0];
+        console.log(webhook_event);
+      });
+  
+      // Returns a '200 OK' response to all requests
+      res.status(200).send('EVENT_RECEIVED');
+    } else {
+      // Returns a '404 Not Found' if event is not from a page subscription
+      res.sendStatus(404);
+    }
+  
+  });
 
-// var inTimeout = {};
+  app.get('/webhook', (req, res) => {
 
-// login({email: userInfo.email, password: userInfo.password}, function(err, api){
-//     if(err) return console.log(err);
-
-//     function sendMessage(str, id){
-//         return new Promise((resolve, reject) => {
-//             api.sendMessage(str, id, function(err){
-//                 if(err){
-//                     reject(err);
-//                     return;
-//                 }
-//                 resolve('send str success');
-//             });
-//         });
-//     }
-
-//     api.listen(function(err, message){
-//         if(err){
-//             console.log(err);
-//             return;
-//         }
-
-//         console.log(message);
-
-//         var req = message.body ? message.body.toLowerCase() : '';
-//         var id = message.threadID;
-//         if(req && !inTimeout[id]){
-//             handleMessage(req, id, sendMessage);
-//             if(timeout){
-//                 inTimeout[id] = true;
-//                 setTimeout(function(){
-//                     inTimeout[id] = false;
-//                 }, timeout);
-//             }
-//         }
-//     });
-
-// });
+    // Your verify token. Should be a random string.
+    let VERIFY_TOKEN = "CHAT-Face-Eark"
+      
+    // Parse the query params
+    let mode = req.query['hub.mode'];
+    let token = req.query['hub.verify_token'];
+    let challenge = req.query['hub.challenge'];
+      
+    // Checks if a token and mode is in the query string of the request
+    if (mode && token) {
+    
+      // Checks the mode and token sent is correct
+      if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+        
+        // Responds with the challenge token from the request
+        console.log('WEBHOOK_VERIFIED');
+        res.status(200).send(challenge);
+      
+      } else {
+        // Responds with '403 Forbidden' if verify tokens do not match
+        res.sendStatus(403);      
+      }
+    }
+  });
