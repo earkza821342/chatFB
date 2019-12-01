@@ -16,6 +16,7 @@ app.use(morgan((tokens, request, response) => {
 try {
     app.use('/account', require('./api/account'))
     app.use('/room', require('./api/room'))
+    app.use('/webhook', require('./api/webhook'))
 } catch (error) {
     console.error(error)
 }
