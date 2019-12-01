@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express();
 
-router.post('/webhook', (req, res) => {
+router.post('/', (req, res) => {
     let body = req.body;
     if (body.object === 'page') {
         body.entry.forEach(function (entry) {
@@ -14,7 +14,7 @@ router.post('/webhook', (req, res) => {
     }
 });
 
-router.get('/webhook', (req, res) => {
+router.get('/', (req, res) => {
     let VERIFY_TOKEN = "CHAT-Face-Eark"
     let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
@@ -26,6 +26,8 @@ router.get('/webhook', (req, res) => {
         } else {
             res.sendStatus(403);
         }
+    } else {
+        res.sendStatus(403);
     }
 });
 
