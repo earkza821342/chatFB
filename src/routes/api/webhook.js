@@ -15,6 +15,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/', (req, res) => {
+    console.log(req);
     let VERIFY_TOKEN = "CHAT-Face-Eark"
     let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
